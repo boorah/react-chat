@@ -12,7 +12,7 @@ export default function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const socketTemp = io();
+    const socketTemp = io(process.env.REACT_APP_BASE_URL);
 
     socketTemp.on("available rooms", (rooms) => {
       setAvailableRooms(rooms);

@@ -4,18 +4,21 @@ const generateRandomColor = require("./utils");
 
 const userColors = new Map();
 
-app.use(express.static("build"));
-
 const PORT = process.env.PORT || 3001;
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
 
 function getAvailableRooms() {
   const temp = [];
-  
+
   io.sockets.adapter.rooms.forEach((value, key) => {
 
     if (!io.sockets.sockets.has(key))
@@ -30,7 +33,7 @@ function getAvailableRooms() {
 
 io.on("connection", (socket) => {
   console.log("a user connected");
-  
+
   // Send available rooms
   io.to(socket.id).emit("available rooms", getAvailableRooms());
 
@@ -52,7 +55,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("join room", ({ username, room }) => {
-    
+
     // Join
     socket.join(room);
 
@@ -84,7 +87,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("leave room", ({ username, room }) => {
-    
+
     // notify the room
     socket.to(room).emit("message", {
       username,
@@ -101,12 +104,12 @@ io.on("connection", (socket) => {
     userColors.delete(socket.id);
 
     io.emit("available rooms", getAvailableRooms());
-    
+
   })
 
   socket.on("disconnect", () => {
     console.log("a user disconnected");
-    
+
     io.emit("available rooms", getAvailableRooms());
   })
 });

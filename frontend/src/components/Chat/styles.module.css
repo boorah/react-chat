@@ -1,0 +1,72 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.headingContainer {
+  display: flex;
+  padding: 1em;
+}
+
+.heading {
+  text-align: center;
+  flex-grow: 1;
+}
+
+.messageContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1em;
+  margin: 1em 0;
+  overflow-y: scroll;
+}
+
+.message {
+  margin: 1em 0;
+  max-width: 200px;
+  overflow-wrap: break-word;
+}
+
+.me {
+  align-self: flex-end;
+  text-align: right;
+}
+
+.other {
+  text-align: left;
+  align-self: flex-start;
+}
+
+.messageUsername {
+  font-weight: bold;
+}
+
+.messageContent {
+  color: white;
+  background-color: #6294DF;
+  margin-top: .5em;
+  padding: .5em;
+  border-radius: 10px;
+}
+
+.inputContainer {
+  box-sizing: border-box;
+  width: 100%;
+  column-gap: 15px;
+  padding: 10px;
+  display: flex;
+  /* position: absolute;
+  bottom: 0; */
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.icon {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}

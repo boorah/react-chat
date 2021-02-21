@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  background-color: white;
+}
+
+body {
+  background-color: rgb(216, 210, 210);
+  font-family: "Work Sans", sans-serif;
+}
+
+@media (min-width: 940px) {
+  body {
+    margin: 0 auto;
+    max-width: 50%;
+  }
+}

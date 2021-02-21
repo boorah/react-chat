@@ -1,0 +1,38 @@
+.heading {
+  text-align: center;
+}
+
+.usernameForm {
+  display: flex;
+  margin-top: 2em;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 1em;
+}
+
+.usernameLabel{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.usernameInput {
+  margin-top: 1em;
+  font-size: 1em;
+  padding: .5em;
+}
+
+.btn {
+  font-family: inherit;
+  border: none;
+  padding: .75em;
+  width: 150px;
+  color: white;
+  font-size: 1em;
+  border-radius: 10px;
+  background-color: #6294DF;
+}
+
+.btn:hover {
+  cursor: pointer;
+}

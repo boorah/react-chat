@@ -13,8 +13,10 @@ export default function Chat({ socket, username }) {
   const inputRef = useRef();
   const messageRef = useRef();
 
-
   useEffect(() => {
+
+    // leave the room on page refresh
+    window.addEventListener("beforeunload", leaveRoom);
 
     socket.on("message", (message) => {
       setMessages(state => state.concat({
@@ -27,19 +29,23 @@ export default function Chat({ socket, username }) {
     })
 
     return () => {
-      console.log("running cleanup!");
       socket.off("message");
       socket.off("color");
-      socket.emit("leave room", {
-        username,
-        room
-      });
+      leaveRoom();
+      window.removeEventListener("beforeunload", leaveRoom);
     }
   }, []);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages])
+
+  function leaveRoom() {
+    socket.emit("leave room", {
+      username,
+      room
+    });
+  }
 
   function scrollToBottom() {
     messageRef.current.scrollIntoView({ behavior: "smooth" });

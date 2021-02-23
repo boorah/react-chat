@@ -28,7 +28,7 @@ export default function App() {
       <Route exact path="/">
         {
           username ?
-            <Rooms username={username} socket={socket} availableRooms={availableRooms}/> :
+            <Rooms username={username} socket={socket} availableRooms={availableRooms} /> :
             <Entry setUsername={setUsername} />
         }
       </Route>
@@ -40,7 +40,11 @@ export default function App() {
         }
       </Route>
       <Route path="/rooms/:room">
-        <Chat socket={socket} username={username} />
+        {
+          username ?
+            <Chat socket={socket} username={username} /> :
+            <Redirect to="/" />
+        }
       </Route>
     </Switch>
   )
